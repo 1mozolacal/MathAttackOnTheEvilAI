@@ -20,7 +20,31 @@ public void textfieldInputAnswer_change1(GTextField source, GEvent event) { //_C
 
 public void buttonSubmit_click1(GButton source, GEvent event) { //_CODE_:buttonSubmit:738354:
   println("buttonSubmit - GButton >> GEvent." + event + " @ " + millis());
+  checkAnswer(textfieldInputAnswer);
 } //_CODE_:buttonSubmit:738354:
+
+public void codePanel_Click(GPanel source, GEvent event) { //_CODE_:codePanel:694690:
+  println("panel1 - GPanel >> GEvent." + event + " @ " + millis());
+} //_CODE_:codePanel:694690:
+
+public void codeInput_change(GTextField source, GEvent event) { //_CODE_:codeInput:740351:
+  println("codeInput - GTextField >> GEvent." + event + " @ " + millis());
+  checkCode(codeInput);
+} //_CODE_:codeInput:740351:
+
+public void timer1_Action(GTimer source) { //_CODE_:timer1:908266:
+  println("timer1 - GTimer >> an event occured @ " + millis());
+  timer1.stop();
+  codePanel.setVisible(false);
+  codeInput.setText("");
+} //_CODE_:timer1:908266:
+
+public void timer2_Action1(GTimer source) { //_CODE_:timer2:723021:
+  println("timer2 - GTimer >> an event occured @ " + millis());
+  timer2.stop();
+  labelClue.setVisible(false);
+  labelClue.setText("");
+} //_CODE_:timer2:723021:
 
 
 
@@ -46,6 +70,17 @@ public void createGUI(){
   labelClue.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelClue.setText("{Clue}");
   labelClue.setOpaque(false);
+  codePanel = new GPanel(this, 312, 2, 165, 70, "Code");
+  codePanel.setText("Code");
+  codePanel.setOpaque(true);
+  codePanel.addEventHandler(this, "codePanel_Click");
+  codeInput = new GTextField(this, 0, 20, 165, 40, G4P.SCROLLBARS_NONE);
+  codeInput.setPromptText("Input Code Here");
+  codeInput.setOpaque(true);
+  codeInput.addEventHandler(this, "codeInput_change");
+  codePanel.addControl(codeInput);
+  timer1 = new GTimer(this, this, "timer1_Action", 2000);
+  timer2 = new GTimer(this, this, "timer2_Action1", 2000);
 }
 
 // Variable declarations 
@@ -54,3 +89,7 @@ GLabel labelQuestion;
 GTextField textfieldInputAnswer; 
 GButton buttonSubmit; 
 GLabel labelClue; 
+GPanel codePanel; 
+GTextField codeInput; 
+GTimer timer1; 
+GTimer timer2; 
