@@ -20,9 +20,6 @@ public void textfieldInputAnswer_change1(GTextField source, GEvent event) { //_C
 
 public void buttonSubmit_click1(GButton source, GEvent event) { //_CODE_:buttonSubmit:738354:
   println("buttonSubmit - GButton >> GEvent." + event + " @ " + millis());
-  if(buttonSubmit.getText().equals("Horay")){
-    windowStory.exit();
-  }
   checkAnswer(textfieldInputAnswer);
 } //_CODE_:buttonSubmit:738354:
 
@@ -37,6 +34,9 @@ synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:
 
 public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonStory:723930:
   windowStory.setVisible(false);
+  if(buttonStory.getText().equals("Horay")){
+    windowStory.exit();
+  }
   println("buttonStory - GButton >> GEvent." + event + " @ " + millis());
 } //_CODE_:buttonStory:723930:
 

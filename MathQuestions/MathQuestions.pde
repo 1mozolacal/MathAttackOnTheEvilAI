@@ -33,11 +33,11 @@ void setup(){
   textfieldEnterCode.setVisible(false);
   state = 1;
   
-  answers[0] = "1";//winnie - 
-  answers[1] = "2";//katelyn - (6,7,13)
-  answers[2] = "3";//Christine - 6
-  answers[3] = "4";//Christine -2.71
-  answers[4] = "5";//Calvin -3.3
+  answers[0] = "3.08";//winnie - 3.08
+  answers[1] = "(6,7,13)";//katelyn - (6,7,13)
+  answers[2] = "6";//Christine - 6
+  answers[3] = "2.71";//Christine - 2.71
+  answers[4] = "3.3";//Calvin - 3.3
   
   clues[0] = "Listen carefully";
   clues[1] = "A good place to hang-out";
@@ -45,10 +45,10 @@ void setup(){
   clues[3] = "I see trees of greeen, red roses too";
   clues[4] = "clue 5";
   
-  codes[0] = "1";//Speaker - 8942
-  codes[1] = "2";//Coat hanger - COAT
-  codes[2] = "3";//teachers desk - KUEH
-  codes[3] = "4";//white board - 3679
+  codes[0] = "8942";//Speaker - 8942
+  codes[1] = "COAT";//Coat hanger - COAT
+  codes[2] = "KUEH";//teachers desk - KUEH
+  codes[3] = "3679";//white board - 3679
   codes[4] = "";//is not used
 
   questions[0] = "A robot is pushing a package up a ramp from (3,3,0) to a positive point on the z-axis. The robot is not very efficient and applies a force that is equal to the ramp but the z value is negative. The Robot has 17g of fuel and uses 2g/J. The robot wants to use all of it's fuel. Determine the end point of the ramp. (round to 2 decimal place values)";
@@ -133,6 +133,7 @@ void draw(){
     labelQuestion.setText(questions[state-1]);
   } else if(state == 6){//finshed the game
     windowStory.setVisible(true);
+    windowCode.setAlwaysOnTop(true);
     labelStory.setText("You have fixed the A.I. and saved the day");
     buttonStory.setText("Horay");
   }
