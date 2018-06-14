@@ -23,28 +23,25 @@ public void buttonSubmit_click1(GButton source, GEvent event) { //_CODE_:buttonS
   checkAnswer(textfieldInputAnswer);
 } //_CODE_:buttonSubmit:738354:
 
-public void codePanel_Click(GPanel source, GEvent event) { //_CODE_:codePanel:694690:
+public void panel1_Click1(GPanel source, GEvent event) { //_CODE_:codePanel:686488:
   println("panel1 - GPanel >> GEvent." + event + " @ " + millis());
-} //_CODE_:codePanel:694690:
+} //_CODE_:codePanel:686488:
 
-public void codeInput_change(GTextField source, GEvent event) { //_CODE_:codeInput:740351:
-  println("codeInput - GTextField >> GEvent." + event + " @ " + millis());
-  checkCode(codeInput);
-} //_CODE_:codeInput:740351:
+synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:windowStory:922006:
+  appc.background(230);
+} //_CODE_:windowStory:922006:
 
-public void timer1_Action(GTimer source) { //_CODE_:timer1:908266:
+public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonStory:723930:
+  println("buttonStory - GButton >> GEvent." + event + " @ " + millis());
+} //_CODE_:buttonStory:723930:
+
+public void timer1_Action1(GTimer source) { //_CODE_:timer1:457799:
   println("timer1 - GTimer >> an event occured @ " + millis());
-  timer1.stop();
-  codePanel.setVisible(false);
-  codeInput.setText("");
-} //_CODE_:timer1:908266:
+} //_CODE_:timer1:457799:
 
-public void timer2_Action1(GTimer source) { //_CODE_:timer2:723021:
+public void timer2_Action1(GTimer source) { //_CODE_:timer2:662084:
   println("timer2 - GTimer >> an event occured @ " + millis());
-  timer2.stop();
-  labelClue.setVisible(false);
-  labelClue.setText("");
-} //_CODE_:timer2:723021:
+} //_CODE_:timer2:662084:
 
 
 
@@ -70,17 +67,23 @@ public void createGUI(){
   labelClue.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelClue.setText("{Clue}");
   labelClue.setOpaque(false);
-  codePanel = new GPanel(this, 312, 2, 165, 70, "Code");
-  codePanel.setText("Code");
+  codePanel = new GPanel(this, 220, 104, 100, 60, "Tab bar text");
+  codePanel.setText("Tab bar text");
   codePanel.setOpaque(true);
-  codePanel.addEventHandler(this, "codePanel_Click");
-  codeInput = new GTextField(this, 0, 20, 165, 40, G4P.SCROLLBARS_NONE);
-  codeInput.setPromptText("Input Code Here");
-  codeInput.setOpaque(true);
-  codeInput.addEventHandler(this, "codeInput_change");
-  codePanel.addControl(codeInput);
-  timer1 = new GTimer(this, this, "timer1_Action", 2000);
-  timer2 = new GTimer(this, this, "timer2_Action1", 2000);
+  codePanel.addEventHandler(this, "panel1_Click1");
+  windowStory = GWindow.getWindow(this, "Story", 0, 0, 480, 320, JAVA2D);
+  windowStory.noLoop();
+  windowStory.addDrawHandler(this, "winStory_draw1");
+  labelStory = new GLabel(windowStory, 130, 50, 210, 90);
+  labelStory.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelStory.setText("An A.I has turned evil. And now it is your job to stop it using your math skill to solve problem which will fix the A.I's code");
+  labelStory.setOpaque(false);
+  buttonStory = new GButton(windowStory, 180, 180, 120, 40);
+  buttonStory.setText("Start your mission");
+  buttonStory.addEventHandler(this, "buttonStory_click1");
+  timer1 = new GTimer(this, this, "timer1_Action1", 1000);
+  timer2 = new GTimer(this, this, "timer2_Action1", 1000);
+  windowStory.loop();
 }
 
 // Variable declarations 
@@ -90,6 +93,8 @@ GTextField textfieldInputAnswer;
 GButton buttonSubmit; 
 GLabel labelClue; 
 GPanel codePanel; 
-GTextField codeInput; 
+GWindow windowStory;
+GLabel labelStory; 
+GButton buttonStory; 
 GTimer timer1; 
 GTimer timer2; 
