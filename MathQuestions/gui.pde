@@ -23,9 +23,9 @@ public void buttonSubmit_click1(GButton source, GEvent event) { //_CODE_:buttonS
   checkAnswer(textfieldInputAnswer);
 } //_CODE_:buttonSubmit:738354:
 
-public void codePanel_Click1(GPanel source, GEvent event) { //_CODE_:codePanel:475285:
-  println("panel1 - GPanel >> GEvent." + event + " @ " + millis());
-} //_CODE_:codePanel:475285:
+public void panel1_Click1(GPanel source, GEvent event) { //_CODE_:codePanel:686488:
+  println("codePanel - GPanel >> GEvent." + event + " @ " + millis());
+} //_CODE_:codePanel:686488:
 
 synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:windowStory:922006:
   appc.background(230);
@@ -36,16 +36,50 @@ public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonSt
   println("buttonStory - GButton >> GEvent." + event + " @ " + millis());
 } //_CODE_:buttonStory:723930:
 
-public void timer1_Action1(GTimer source) { //_CODE_:timer1:827374:
+public void timer1_Action1(GTimer source) { //_CODE_:timer1:457799:
   println("timer1 - GTimer >> an event occured @ " + millis());
-} //_CODE_:timer1:827374:
+} //_CODE_:timer1:457799:
 
-public void timer2_Action1(GTimer source) { //_CODE_:timer2:229519:
+public void timer2_Action1(GTimer source) { //_CODE_:timer2:662084:
   println("timer2 - GTimer >> an event occured @ " + millis());
-} //_CODE_:timer2:229519:
+} //_CODE_:timer2:662084:
 
-synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windowCode:528872:
+synchronized public void winCode_draw1(PApplet appc, GWinData data) { //_CODE_:windowCode:528872:
   appc.background(230);
+  int deltaTime = millis() - timeStorage;
+  if(deltaTime>100 && fixingCode){
+    //change next char
+    GLabel codeToFix;
+      if(whichLineToFix ==0){
+        codeToFix = labelCode1;
+      } else if(whichLineToFix ==1){
+        codeToFix = labelCode2;
+      }else if(whichLineToFix ==2){
+        codeToFix = labelCode3;
+      }else if(whichLineToFix ==3){
+        codeToFix = labelCode4;
+      }else {
+        codeToFix = labelCode5;
+      }
+      
+    if(currentCharFixing<30){
+      String line = codeToFix.getText();
+      char[] lineComponents = line.toCharArray();
+      char newBit = getRandomBit(1).charAt(0);
+      lineComponents[currentCharFixing] = newBit ;
+      currentCharFixing++;
+      String newText = new String(lineComponents);
+      codeToFix.setText(newText);
+      timeStorage = millis();
+    } else {
+     codeToFix.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+     fixingCode = false;
+     whichLineToFix++;
+     currentCharFixing=0;
+    }
+  } else if(deltaTime>1000 && deltaTime<2000){//so it is not called when we are trying to show it again(but we should be resting the time)
+    windowCode.setVisible(false);
+  }
 } //_CODE_:windowCode:528872:
 
 
@@ -72,10 +106,10 @@ public void createGUI(){
   labelClue.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelClue.setText("{Clue}");
   labelClue.setOpaque(false);
-  codePanel = new GPanel(this, 381, 4, 100, 60, "Code");
-  codePanel.setText("Code");
+  codePanel = new GPanel(this, 300, 130, 100, 60, "Tab bar text");
+  codePanel.setText("Tab bar text");
   codePanel.setOpaque(true);
-  codePanel.addEventHandler(this, "codePanel_Click1");
+  codePanel.addEventHandler(this, "panel1_Click1");
   windowStory = GWindow.getWindow(this, "Story", 0, 0, 480, 320, JAVA2D);
   windowStory.noLoop();
   windowStory.addDrawHandler(this, "winStory_draw1");
@@ -90,7 +124,7 @@ public void createGUI(){
   timer2 = new GTimer(this, this, "timer2_Action1", 1000);
   windowCode = GWindow.getWindow(this, "AI Code", 0, 0, 240, 120, JAVA2D);
   windowCode.noLoop();
-  windowCode.addDrawHandler(this, "win_draw1");
+  windowCode.addDrawHandler(this, "winCode_draw1");
   labelCode1 = new GLabel(windowCode, 0, 20, 240, 20);
   labelCode1.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelCode1.setText("My label1");

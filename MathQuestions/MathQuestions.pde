@@ -9,6 +9,11 @@ String [] clues = new String [5];
 String [] codes = new String [5];
 
 
+public boolean fixingCode = false;
+public int whichLineToFix = 0;
+public int currentCharFixing = 0;
+public int timeStorage = 0;
+
 void setup(){
   size(480, 320);
   createGUI();
@@ -49,7 +54,7 @@ void checkAnswer(GTextField answer){
   if (answer.getText().equals(answers[state-1])) {
     fixBinary();
     showClue();
-    codePanel.setVisible(true);
+    //codePanel.setVisible(true);
     return;
   }
   labelClue.setVisible(true);
@@ -68,7 +73,10 @@ void checkCode(GTextField code) {
 }
 
 void fixBinary() {
-  //placeholder
+  windowCode.setVisible(true);
+  timeStorage = millis();
+  currentCharFixing =0;
+  fixingCode=true;
   
 }
 
