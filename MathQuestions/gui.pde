@@ -23,9 +23,10 @@ public void buttonSubmit_click1(GButton source, GEvent event) { //_CODE_:buttonS
   checkAnswer(textfieldInputAnswer);
 } //_CODE_:buttonSubmit:738354:
 
-public void panel1_Click1(GPanel source, GEvent event) { //_CODE_:codePanel:686488:
-  println("codePanel - GPanel >> GEvent." + event + " @ " + millis());
-} //_CODE_:codePanel:686488:
+public void textfieldEnterCode_change1(GTextField source, GEvent event) { //_CODE_:textfieldEnterCode:894445:
+  println("textfieldEnterCode - GTextField >> GEvent." + event + " @ " + millis());
+  checkCode(textfieldEnterCode);
+} //_CODE_:textfieldEnterCode:894445:
 
 synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:windowStory:922006:
   appc.background(230);
@@ -38,10 +39,19 @@ public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonSt
 
 public void timer1_Action1(GTimer source) { //_CODE_:timer1:457799:
   println("timer1 - GTimer >> an event occured @ " + millis());
+  timer1.stop();
+  textfieldEnterCode.setVisible(false);
+  addWhiteBoxForClue = false;
+  textfieldEnterCode.setText("");
 } //_CODE_:timer1:457799:
 
 public void timer2_Action1(GTimer source) { //_CODE_:timer2:662084:
   println("timer2 - GTimer >> an event occured @ " + millis());
+  timer2.stop();
+  //labelClue.setVisible(false);
+  labelClue.setText("");
+  addWhiteBoxForClue = false;
+  labelClue.setLocalColorScheme(GCScheme.BLUE_SCHEME);
 } //_CODE_:timer2:662084:
 
 synchronized public void winCode_draw1(PApplet appc, GWinData data) { //_CODE_:windowCode:528872:
@@ -77,7 +87,7 @@ synchronized public void winCode_draw1(PApplet appc, GWinData data) { //_CODE_:w
      whichLineToFix++;
      currentCharFixing=0;
     }
-  } else if(deltaTime>1000 && deltaTime<2000){//so it is not called when we are trying to show it again(but we should be resting the time)
+  } else if(deltaTime>1000 && deltaTime<2000){//so it is not called when we are trying to show it again(but we should be resting the time)S
     windowCode.setVisible(false);
   }
 } //_CODE_:windowCode:528872:
@@ -90,39 +100,39 @@ public void createGUI(){
   G4P.messagesEnabled(false);
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setCursor(ARROW);
-  surface.setTitle("Sketch Window");
-  labelQuestion = new GLabel(this, 120, 50, 180, 40);
+  surface.setTitle("Attack AI");
+  labelQuestion = new GLabel(this, 0, 0, 480, 70);
   labelQuestion.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelQuestion.setText("{Question}");
   labelQuestion.setOpaque(false);
-  textfieldInputAnswer = new GTextField(this, 130, 110, 160, 60, G4P.SCROLLBARS_NONE);
+  textfieldInputAnswer = new GTextField(this, 150, 80, 160, 60, G4P.SCROLLBARS_NONE);
   textfieldInputAnswer.setPromptText("Type in your answer here");
   textfieldInputAnswer.setOpaque(true);
   textfieldInputAnswer.addEventHandler(this, "textfieldInputAnswer_change1");
-  buttonSubmit = new GButton(this, 160, 190, 80, 30);
+  buttonSubmit = new GButton(this, 190, 140, 80, 30);
   buttonSubmit.setText("Submit");
   buttonSubmit.addEventHandler(this, "buttonSubmit_click1");
-  labelClue = new GLabel(this, 120, 250, 170, 40);
+  labelClue = new GLabel(this, 140, 230, 180, 40);
   labelClue.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelClue.setText("{Clue}");
   labelClue.setOpaque(false);
-  codePanel = new GPanel(this, 300, 130, 100, 60, "Tab bar text");
-  codePanel.setText("Tab bar text");
-  codePanel.setOpaque(true);
-  codePanel.addEventHandler(this, "panel1_Click1");
-  windowStory = GWindow.getWindow(this, "Story", 0, 0, 480, 320, JAVA2D);
+  textfieldEnterCode = new GTextField(this, 140, 270, 180, 30, G4P.SCROLLBARS_NONE);
+  textfieldEnterCode.setPromptText("Enter code here");
+  textfieldEnterCode.setOpaque(true);
+  textfieldEnterCode.addEventHandler(this, "textfieldEnterCode_change1");
+  windowStory = GWindow.getWindow(this, "Story", 470, 200, 480, 320, JAVA2D);
   windowStory.noLoop();
   windowStory.addDrawHandler(this, "winStory_draw1");
   labelStory = new GLabel(windowStory, 130, 50, 210, 90);
   labelStory.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  labelStory.setText("An A.I has turned evil. And now it is your job to stop it using your math skill to solve problem which will fix the A.I's code");
+  labelStory.setText("An A.I. has turned evil. And now it is your job to stop it using your math skills to solve problems which will fix the A.I's code.");
   labelStory.setOpaque(false);
   buttonStory = new GButton(windowStory, 180, 180, 120, 40);
   buttonStory.setText("Start your mission");
   buttonStory.addEventHandler(this, "buttonStory_click1");
-  timer1 = new GTimer(this, this, "timer1_Action1", 1000);
-  timer2 = new GTimer(this, this, "timer2_Action1", 1000);
-  windowCode = GWindow.getWindow(this, "AI Code", 0, 0, 240, 120, JAVA2D);
+  timer1 = new GTimer(this, this, "timer1_Action1", 2000);
+  timer2 = new GTimer(this, this, "timer2_Action1", 2000);
+  windowCode = GWindow.getWindow(this, "AI Code", 500, 250, 240, 120, JAVA2D);
   windowCode.noLoop();
   windowCode.addDrawHandler(this, "winCode_draw1");
   labelCode1 = new GLabel(windowCode, 0, 20, 240, 20);
@@ -150,6 +160,11 @@ public void createGUI(){
   labelCode5.setText("My label5");
   labelCode5.setLocalColorScheme(GCScheme.RED_SCHEME);
   labelCode5.setOpaque(false);
+  labelFixing = new GLabel(windowCode, 60, 0, 110, 20);
+  labelFixing.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelFixing.setText("Fixing A.I.'s code...");
+  labelFixing.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  labelFixing.setOpaque(false);
   windowStory.loop();
   windowCode.loop();
 }
@@ -160,7 +175,7 @@ GLabel labelQuestion;
 GTextField textfieldInputAnswer; 
 GButton buttonSubmit; 
 GLabel labelClue; 
-GPanel codePanel; 
+GTextField textfieldEnterCode; 
 GWindow windowStory;
 GLabel labelStory; 
 GButton buttonStory; 
@@ -172,3 +187,4 @@ GLabel labelCode2;
 GLabel labelCode3; 
 GLabel labelCode4; 
 GLabel labelCode5; 
+GLabel labelFixing; 
