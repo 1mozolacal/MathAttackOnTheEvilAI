@@ -23,9 +23,9 @@ public void buttonSubmit_click1(GButton source, GEvent event) { //_CODE_:buttonS
   checkAnswer(textfieldInputAnswer);
 } //_CODE_:buttonSubmit:738354:
 
-public void panel1_Click1(GPanel source, GEvent event) { //_CODE_:codePanel:686488:
+public void codePanel_Click1(GPanel source, GEvent event) { //_CODE_:codePanel:475285:
   println("panel1 - GPanel >> GEvent." + event + " @ " + millis());
-} //_CODE_:codePanel:686488:
+} //_CODE_:codePanel:475285:
 
 synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:windowStory:922006:
   appc.background(230);
@@ -35,13 +35,13 @@ public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonSt
   println("buttonStory - GButton >> GEvent." + event + " @ " + millis());
 } //_CODE_:buttonStory:723930:
 
-public void timer1_Action1(GTimer source) { //_CODE_:timer1:457799:
+public void timer1_Action1(GTimer source) { //_CODE_:timer1:827374:
   println("timer1 - GTimer >> an event occured @ " + millis());
-} //_CODE_:timer1:457799:
+} //_CODE_:timer1:827374:
 
-public void timer2_Action1(GTimer source) { //_CODE_:timer2:662084:
+public void timer2_Action1(GTimer source) { //_CODE_:timer2:229519:
   println("timer2 - GTimer >> an event occured @ " + millis());
-} //_CODE_:timer2:662084:
+} //_CODE_:timer2:229519:
 
 
 
@@ -67,10 +67,10 @@ public void createGUI(){
   labelClue.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelClue.setText("{Clue}");
   labelClue.setOpaque(false);
-  codePanel = new GPanel(this, 220, 104, 100, 60, "Tab bar text");
-  codePanel.setText("Tab bar text");
+  codePanel = new GPanel(this, 381, 4, 100, 60, "Code");
+  codePanel.setText("Code");
   codePanel.setOpaque(true);
-  codePanel.addEventHandler(this, "panel1_Click1");
+  codePanel.addEventHandler(this, "codePanel_Click1");
   windowStory = GWindow.getWindow(this, "Story", 0, 0, 480, 320, JAVA2D);
   windowStory.noLoop();
   windowStory.addDrawHandler(this, "winStory_draw1");
@@ -81,8 +81,8 @@ public void createGUI(){
   buttonStory = new GButton(windowStory, 180, 180, 120, 40);
   buttonStory.setText("Start your mission");
   buttonStory.addEventHandler(this, "buttonStory_click1");
-  timer1 = new GTimer(this, this, "timer1_Action1", 1000);
-  timer2 = new GTimer(this, this, "timer2_Action1", 1000);
+  timer1 = new GTimer(this, this, "timer1_Action1", 2000);
+  timer2 = new GTimer(this, this, "timer2_Action1", 2000);
   windowStory.loop();
 }
 
