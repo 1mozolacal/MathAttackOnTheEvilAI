@@ -35,7 +35,11 @@ void setup(){
   codes[3] = "code 4";
   codes[4] = "code 5";
 
-
+  labelCode1.setText( getRandomBit(30) );
+  labelCode2.setText( getRandomBit(30) );
+  labelCode3.setText( getRandomBit(30) );
+  labelCode4.setText( getRandomBit(30) );
+  labelCode5.setText( getRandomBit(30) );
 }
 
 void checkAnswer(GTextField answer){
@@ -80,6 +84,17 @@ void newQuestion() {
   labelClue.setVisible(false);
 }
 
+String getRandomBit(int length_){
+ String str = "";
+ for (int i =0; i<length_; i++){
+   if((int)(Math.random()*2) ==0){
+     str+="0";
+   }else {
+     str+="1";
+   }
+ }
+ return str;
+}
 
 void draw(){
   background(200);

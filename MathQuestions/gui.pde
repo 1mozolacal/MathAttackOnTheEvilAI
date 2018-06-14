@@ -32,6 +32,7 @@ synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:
 } //_CODE_:windowStory:922006:
 
 public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonStory:723930:
+  windowStory.setVisible(false);
   println("buttonStory - GButton >> GEvent." + event + " @ " + millis());
 } //_CODE_:buttonStory:723930:
 
@@ -42,6 +43,10 @@ public void timer1_Action1(GTimer source) { //_CODE_:timer1:827374:
 public void timer2_Action1(GTimer source) { //_CODE_:timer2:229519:
   println("timer2 - GTimer >> an event occured @ " + millis());
 } //_CODE_:timer2:229519:
+
+synchronized public void win_draw1(PApplet appc, GWinData data) { //_CODE_:windowCode:528872:
+  appc.background(230);
+} //_CODE_:windowCode:528872:
 
 
 
@@ -81,9 +86,38 @@ public void createGUI(){
   buttonStory = new GButton(windowStory, 180, 180, 120, 40);
   buttonStory.setText("Start your mission");
   buttonStory.addEventHandler(this, "buttonStory_click1");
-  timer1 = new GTimer(this, this, "timer1_Action1", 2000);
-  timer2 = new GTimer(this, this, "timer2_Action1", 2000);
+  timer1 = new GTimer(this, this, "timer1_Action1", 1000);
+  timer2 = new GTimer(this, this, "timer2_Action1", 1000);
+  windowCode = GWindow.getWindow(this, "AI Code", 0, 0, 240, 120, JAVA2D);
+  windowCode.noLoop();
+  windowCode.addDrawHandler(this, "win_draw1");
+  labelCode1 = new GLabel(windowCode, 0, 20, 240, 20);
+  labelCode1.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelCode1.setText("My label1");
+  labelCode1.setLocalColorScheme(GCScheme.RED_SCHEME);
+  labelCode1.setOpaque(false);
+  labelCode2 = new GLabel(windowCode, 0, 40, 240, 20);
+  labelCode2.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelCode2.setText("My label2");
+  labelCode2.setLocalColorScheme(GCScheme.RED_SCHEME);
+  labelCode2.setOpaque(false);
+  labelCode3 = new GLabel(windowCode, 0, 60, 240, 20);
+  labelCode3.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelCode3.setText("My label3");
+  labelCode3.setLocalColorScheme(GCScheme.RED_SCHEME);
+  labelCode3.setOpaque(false);
+  labelCode4 = new GLabel(windowCode, 0, 80, 240, 20);
+  labelCode4.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelCode4.setText("My label4");
+  labelCode4.setLocalColorScheme(GCScheme.RED_SCHEME);
+  labelCode4.setOpaque(false);
+  labelCode5 = new GLabel(windowCode, 0, 100, 240, 20);
+  labelCode5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelCode5.setText("My label5");
+  labelCode5.setLocalColorScheme(GCScheme.RED_SCHEME);
+  labelCode5.setOpaque(false);
   windowStory.loop();
+  windowCode.loop();
 }
 
 // Variable declarations 
@@ -98,3 +132,9 @@ GLabel labelStory;
 GButton buttonStory; 
 GTimer timer1; 
 GTimer timer2; 
+GWindow windowCode;
+GLabel labelCode1; 
+GLabel labelCode2; 
+GLabel labelCode3; 
+GLabel labelCode4; 
+GLabel labelCode5; 
