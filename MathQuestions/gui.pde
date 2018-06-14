@@ -20,6 +20,9 @@ public void textfieldInputAnswer_change1(GTextField source, GEvent event) { //_C
 
 public void buttonSubmit_click1(GButton source, GEvent event) { //_CODE_:buttonSubmit:738354:
   println("buttonSubmit - GButton >> GEvent." + event + " @ " + millis());
+  if(buttonSubmit.getText().equals("Horay")){
+    windowStory.exit();
+  }
   checkAnswer(textfieldInputAnswer);
 } //_CODE_:buttonSubmit:738354:
 
@@ -101,15 +104,15 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setCursor(ARROW);
   surface.setTitle("Attack AI");
-  labelQuestion = new GLabel(this, 0, 0, 480, 70);
+  labelQuestion = new GLabel(this, 0, 0, 480, 110);
   labelQuestion.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelQuestion.setText("{Question}");
   labelQuestion.setOpaque(false);
-  textfieldInputAnswer = new GTextField(this, 150, 80, 160, 60, G4P.SCROLLBARS_NONE);
+  textfieldInputAnswer = new GTextField(this, 150, 130, 160, 30, G4P.SCROLLBARS_NONE);
   textfieldInputAnswer.setPromptText("Type in your answer here");
   textfieldInputAnswer.setOpaque(true);
   textfieldInputAnswer.addEventHandler(this, "textfieldInputAnswer_change1");
-  buttonSubmit = new GButton(this, 190, 140, 80, 30);
+  buttonSubmit = new GButton(this, 190, 180, 80, 30);
   buttonSubmit.setText("Submit");
   buttonSubmit.addEventHandler(this, "buttonSubmit_click1");
   labelClue = new GLabel(this, 140, 230, 180, 40);
@@ -122,6 +125,7 @@ public void createGUI(){
   textfieldEnterCode.addEventHandler(this, "textfieldEnterCode_change1");
   windowStory = GWindow.getWindow(this, "Story", 470, 200, 480, 320, JAVA2D);
   windowStory.noLoop();
+  windowStory.setActionOnClose(G4P.EXIT_APP);
   windowStory.addDrawHandler(this, "winStory_draw1");
   labelStory = new GLabel(windowStory, 130, 50, 210, 90);
   labelStory.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);

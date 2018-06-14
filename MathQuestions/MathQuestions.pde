@@ -12,6 +12,7 @@ private int state;
 String [] answers = new String [5];
 String [] clues = new String [5];
 String [] codes = new String [5];
+String [] questions = new String[5];
 
 
 public boolean fixingCode = false;
@@ -32,24 +33,30 @@ void setup(){
   textfieldEnterCode.setVisible(false);
   state = 1;
   
-  answers[0] = "1";//winnie
-  answers[1] = "2";//katelyn
-  answers[2] = "3";//Christine
-  answers[3] = "4";//Christine
-  answers[4] = "5";//Calvin
+  answers[0] = "1";//winnie - 
+  answers[1] = "2";//katelyn - (6,7,13)
+  answers[2] = "3";//Christine - 6
+  answers[3] = "4";//Christine -2.71
+  answers[4] = "5";//Calvin -3.3
   
-  clues[0] = "clue 1";
-  clues[1] = "clue 2";
-  clues[2] = "clue 3";
-  clues[3] = "clue 4";
+  clues[0] = "Listen carefully";
+  clues[1] = "A good place to hang-out";
+  clues[2] = "Where Ms.Kueh takes a seat";
+  clues[3] = "I see trees of greeen, red roses too";
   clues[4] = "clue 5";
   
-  codes[0] = "8942";//Speaker
-  codes[1] = "COAT";//Coat hanger
-  codes[2] = "KUEH";//teachers desk
-  codes[3] = "3679";//white board
-  codes[4] = "code 5";//is not used
+  codes[0] = "1";//Speaker - 8942
+  codes[1] = "2";//Coat hanger - COAT
+  codes[2] = "3";//teachers desk - KUEH
+  codes[3] = "4";//white board - 3679
+  codes[4] = "";//is not used
 
+  questions[0] = "A robot is pushing a package up a ramp from (3,3,0) to a positive point on the z-axis. The robot is not very efficient and applies a force that is equal to the ramp but the z value is negative. The Robot has 17g of fuel and uses 2g/J. The robot wants to use all of it's fuel. Determine the end point of the ramp. (round to 2 decimal place values)";
+  questions[1] = "Find the parametric equation of the plane passing throught the points (1,-3,2),(-5,4,1),(-2,-6,5). Find a vector perpendicular to this plane.(Input in formate '(a,b,c)'with no spaces";
+  questions[2] = "State all discontiunities in the piecewise function \ng(x)={3x,x<4}\n\t {x^2-4,4<=x<6}\n\t {2^(x-2),x>=6}";
+  questions[3] = "For f(x) = sinxlnx, find f'(45)";
+  questions[4] = "A person is standing on a plane x-y+z+5=0 at point (0,0,-5). Their shadow has a magnitude of 3, the sunlight shines in the direction (-2,-2,-5). How tall is the person? (Round to nearest tenth)";
+  
   labelCode1.setText( getRandomBit(30) );
   labelCode2.setText( getRandomBit(30) );
   labelCode3.setText( getRandomBit(30) );
@@ -64,6 +71,7 @@ void checkAnswer(GTextField answer){
   if (answer.getText().equals(answers[state-1])) {
     showClue();
     textfieldEnterCode.setVisible(true);
+    checkCode(textfieldEnterCode);
     buttonSubmit.setEnabled(false);
     return;
   }
@@ -122,7 +130,7 @@ String getRandomBit(int length_){
 void draw(){
   background(10);
   if (state > 0 && state < 6) {
-    labelQuestion.setText("Question " + state);
+    labelQuestion.setText(questions[state-1]);
   } else if(state == 6){//finshed the game
     windowStory.setVisible(true);
     labelStory.setText("You have fixed the A.I. and saved the day");
@@ -135,7 +143,7 @@ void draw(){
     if(fallingNum[i].y>(height+10) ){
       fallingNum[i] = new PVector((float)Math.random()*width, -10, (int)(Math.random()*2) );
     } else {
-      fallingNum[i].y+= metaData[i].x;
+      fallingNum[i].y+= metaData[i].y/5;
       fill(0,255,0);
       textSize(metaData[i].y);
       text((int)fallingNum[i].z, fallingNum[i].x, fallingNum[i].y);
@@ -147,7 +155,7 @@ void draw(){
   
   noStroke();
   fill(255,255,255);
-  rect(0,0,width,70);
+  rect(0,0,width,110);
   
   if(addWhiteBoxForClue){
     fill(200,200,200);
