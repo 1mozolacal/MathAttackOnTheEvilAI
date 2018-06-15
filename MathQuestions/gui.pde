@@ -34,7 +34,7 @@ synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:
 
 public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonStory:723930:
   windowStory.setVisible(false);
-  if(buttonStory.getText().equals("Horay")){
+  if(buttonStory.getText().equals(endButtonText)){
     windowStory.exit();
   }
   println("buttonStory - GButton >> GEvent." + event + " @ " + millis());

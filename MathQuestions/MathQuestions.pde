@@ -19,6 +19,7 @@ public boolean fixingCode = false;
 public int whichLineToFix = 0;
 public int currentCharFixing = 0;
 public int timeStorage = 0;
+public String endButtonText = "Horay";
 
 void setup(){
   size(480, 320);
@@ -136,7 +137,7 @@ void draw(){
     windowStory.setVisible(true);
     windowCode.setAlwaysOnTop(true);
     labelStory.setText("You have fixed the A.I. and saved the day");
-    buttonStory.setText("Horray");
+    buttonStory.setText(endButtonText);
   }
   
   
