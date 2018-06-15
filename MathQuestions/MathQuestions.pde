@@ -37,7 +37,7 @@ void setup(){
   answers[1] = "(6,7,13)";//katelyn - (6,7,13)
   answers[2] = "6";//Christine - 6
   answers[3] = "2.71";//Christine - 2.71
-  answers[4] = "3.3";//Calvin - 3.3
+  answers[4] = "5.3";//Calvin - 5.3
   
   clues[0] = "Listen carefully";
   clues[1] = "A good place to hang-out";
@@ -51,10 +51,11 @@ void setup(){
   codes[3] = "3679";//white board - 3679
   codes[4] = "";//is not used
 
-  questions[0] = "A robot is pushing a package up a ramp from (3,3,0) to a positive point on the z-axis. The robot is not very efficient and applies a force that is equal to the ramp but the z value is negative. The Robot has 17g of fuel and uses 2g/J. The robot wants to use all of it's fuel. Determine the end point of the ramp. (round to 2 decimal place values)";
-  questions[1] = "Find the parametric equation of the plane passing throught the points (1,-3,2),(-5,4,1),(-2,-6,5). Find a vector perpendicular to this plane.(Input in formate '(a,b,c)'with no spaces";
-  questions[2] = "State all discontiunities in the piecewise function \ng(x)={3x,x<4}\n\t {x^2-4,4<=x<6}\n\t {2^(x-2),x>=6}";
-  questions[3] = "For f(x) = sinxlnx, find f'(45)";
+  //questions[0] = "A robot is pushing a package up a ramp from (3,3,0) to a positive point on the z-axis. The robot is not very efficient and applies a force that is equal to the ramp but the z value is negative. The robot has 17g of fuel and uses 2g/J. The robot wants to use all of it's fuel. Determine the end point of the ramp. (round to 2 decimal place values)";
+  questions[0] = "A robot is pushing an information packet up a ramp from (3,3,0) to the server opening at the top of the ramp. The opening lies on the line formed by the intersection of the XZ and YZ planes. The robot has 17g of fuel, and uses 2g/J in pushing the packet. However, the robot always pushes X degrees below horizontal, where X is the inclination angle of the ramp, due to a bug. How high must the opening be if all the fuel must be used? Round to the nearest hundredth.";
+  questions[1] = "Find the parametric equation of the plane passing throught the points (1,-3,2), (-5,4,1)," + '\n' + "(-2,-6,5). Input the simplified vector perpendicular to this plane.(Input in format '(a,b,c)' with no spaces, and 'a' is positive.)";
+  questions[2] = "State all discontiunities (x values) in the piecewise function \n {3x, x < 4} \n \t g(x) = {x^2-4, 4 <= x < 6} \n \t      {2^(x-2), x >= 6}";
+  questions[3] = "For f(x) = sinx(lnx), find f'(45). Round answer to nearest hundredth.";
   questions[4] = "A person is standing on a plane x-y+z+5=0 at point (0,0,-5). Their shadow has a magnitude of 3, the sunlight shines in the direction (-2,-2,-5). How tall is the person? (Round to nearest tenth)";
   
   labelCode1.setText( getRandomBit(30) );
@@ -135,7 +136,7 @@ void draw(){
     windowStory.setVisible(true);
     windowCode.setAlwaysOnTop(true);
     labelStory.setText("You have fixed the A.I. and saved the day");
-    buttonStory.setText("Horay");
+    buttonStory.setText("Horray");
   }
   
   
@@ -155,14 +156,13 @@ void draw(){
   }
   
   noStroke();
-  fill(255,255,255);
+  fill(10);
   rect(0,0,width,110);
   
   if(addWhiteBoxForClue){
     fill(200,200,200);
     rect(140,230,180,40);
   }
-  
   
   
 }

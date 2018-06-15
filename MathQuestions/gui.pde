@@ -29,7 +29,7 @@ public void textfieldEnterCode_change1(GTextField source, GEvent event) { //_COD
 } //_CODE_:textfieldEnterCode:894445:
 
 synchronized public void winStory_draw1(PApplet appc, GWinData data) { //_CODE_:windowStory:922006:
-  appc.background(230);
+  appc.background(0);
 } //_CODE_:windowStory:922006:
 
 public void buttonStory_click1(GButton source, GEvent event) { //_CODE_:buttonStory:723930:
@@ -107,13 +107,16 @@ public void createGUI(){
   labelQuestion = new GLabel(this, 0, 0, 480, 110);
   labelQuestion.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelQuestion.setText("{Question}");
+  labelQuestion.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   labelQuestion.setOpaque(false);
   textfieldInputAnswer = new GTextField(this, 150, 130, 160, 30, G4P.SCROLLBARS_NONE);
   textfieldInputAnswer.setPromptText("Type in your answer here");
+  textfieldInputAnswer.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   textfieldInputAnswer.setOpaque(true);
   textfieldInputAnswer.addEventHandler(this, "textfieldInputAnswer_change1");
   buttonSubmit = new GButton(this, 190, 180, 80, 30);
   buttonSubmit.setText("Submit");
+  buttonSubmit.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   buttonSubmit.addEventHandler(this, "buttonSubmit_click1");
   labelClue = new GLabel(this, 140, 230, 180, 40);
   labelClue.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
@@ -121,6 +124,7 @@ public void createGUI(){
   labelClue.setOpaque(false);
   textfieldEnterCode = new GTextField(this, 140, 270, 180, 30, G4P.SCROLLBARS_NONE);
   textfieldEnterCode.setPromptText("Enter code here");
+  textfieldEnterCode.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   textfieldEnterCode.setOpaque(true);
   textfieldEnterCode.addEventHandler(this, "textfieldEnterCode_change1");
   windowStory = GWindow.getWindow(this, "Story", 470, 200, 480, 320, JAVA2D);
@@ -130,9 +134,11 @@ public void createGUI(){
   labelStory = new GLabel(windowStory, 130, 50, 210, 90);
   labelStory.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelStory.setText("An A.I. has turned evil. And now it is your job to stop it using your math skills to solve problems which will fix the A.I's code.");
+  labelStory.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   labelStory.setOpaque(false);
   buttonStory = new GButton(windowStory, 180, 180, 120, 40);
   buttonStory.setText("Start your mission");
+  buttonStory.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   buttonStory.addEventHandler(this, "buttonStory_click1");
   timer1 = new GTimer(this, this, "timer1_Action1", 2000);
   timer2 = new GTimer(this, this, "timer2_Action1", 2000);
